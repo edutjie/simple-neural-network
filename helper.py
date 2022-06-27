@@ -25,6 +25,7 @@ class NeuralNetwork:
 
         # activation function is the sigmoid function
         self.activation_function = lambda x: scipy.special.expit(x)
+        self.inverse_activation_function = lambda x: scipy.special.logit(x)
 
         # update weight function
         self.update_weight = lambda Ek, Ok, Oj: self.lr * np.dot(
@@ -74,6 +75,30 @@ class NeuralNetwork:
         final_outputs = self.activation_function(final_inputs)
 
         return final_outputs
+
+    # back query
+    def back_query(self, targets_list):
+        final_outputs = np.array(targets_list, ndmin=2).T
+
+        final_inputs = self.inverse_activation_function(final_outputs)
+
+        hidden_outputs = np.dot(self.who.T, final_inputs)
+        # scale them back to 0.01 to 0.99
+        hidden_outputs -= np.min(hidden_outputs)
+        hidden_outputs /= np.max(hidden_outputs)
+        hidden_outputs *= 0.98
+        hidden_outputs += 0.01
+
+        hidden_inputs = self.inverse_activation_function(hidden_outputs)
+
+        inputs = np.dot(self.wih.T, hidden_inputs)
+        # scale them back to 0.01 to 0.99
+        inputs -= np.min(inputs)
+        inputs /= np.max(inputs)
+        inputs *= 0.98
+        inputs += 0.01
+
+        return inputs
 
 
 def image_rescaller(file_name):
