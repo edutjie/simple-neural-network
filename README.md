@@ -24,8 +24,10 @@ Simple Neural Network I made based on "Make Your Own Neural Network" Book by Tar
   - Doing Multiple Runs (epoch)
   - Change Netwrok Shape (Change the number of hidden layer nodes)
 - Final Result
-  - My Model highest score is **0.9737**
+  - My Model highest score is **0.9762**
 - Save Model to .pkl
+- Backwards Query
+  - Learn what the neural network has learnt
 
 ## Predicting Number from Your Own Handwriting
 > Source Code: *handwriting.ipynb*
