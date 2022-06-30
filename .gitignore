@@ -131,3 +131,4 @@ dmypy.json
 # custom
 data/mnist_train.csv
 data/mnist_test.csv
+essay.txt
